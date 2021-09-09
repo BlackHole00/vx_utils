@@ -1,4 +1,4 @@
-#include "option.h"
+#include "vx_option.h"
 
 _VX_OPTION_CREATE_BODY_FOR_TYPE(u8)
 _VX_OPTION_CREATE_BODY_FOR_TYPE(u16)

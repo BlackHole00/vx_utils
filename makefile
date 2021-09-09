@@ -38,26 +38,26 @@ endif
 _: all
 
 #	FILES
-file.o:
-	$(CC) -c $(SRC_DIR)/file.c 		-o $(BUILD_DIR)/file.o 		$(ARGS)
-functions.o:
-	$(CC) -c $(SRC_DIR)/functions.c -o $(BUILD_DIR)/functions.o $(ARGS)
-math.o:
-	$(CC) -c $(SRC_DIR)/math.c 		-o $(BUILD_DIR)/math.o 		$(ARGS)
-mem.o:
-	$(CC) -c $(SRC_DIR)/mem.c 		-o $(BUILD_DIR)/mem.o 		$(ARGS)
-option.o:
-	$(CC) -c $(SRC_DIR)/option.c 	-o $(BUILD_DIR)/option.o 	$(ARGS)
-panic.o:
-	$(CC) -c $(SRC_DIR)/panic.c 	-o $(BUILD_DIR)/panic.o 	$(ARGS)
-tostring.o:
-	$(CC) -c $(SRC_DIR)/tostring.c 	-o $(BUILD_DIR)/tostring.o 	$(ARGS)
-vector.o:
-	$(CC) -c $(SRC_DIR)/vector.c 	-o $(BUILD_DIR)/vector.o 	$(ARGS)
+vx_file.o:
+	$(CC) -c $(SRC_DIR)/vx_file.c 		-o $(BUILD_DIR)/vx_file.o 		$(ARGS)
+vx_functions.o:
+	$(CC) -c $(SRC_DIR)/vx_functions.c 	-o $(BUILD_DIR)/vx_functions.o 	$(ARGS)
+vx_math.o:
+	$(CC) -c $(SRC_DIR)/vx_math.c 		-o $(BUILD_DIR)/vx_math.o 		$(ARGS)
+vx_mem.o:
+	$(CC) -c $(SRC_DIR)/vx_mem.c 		-o $(BUILD_DIR)/vx_mem.o 		$(ARGS)
+vx_option.o:
+	$(CC) -c $(SRC_DIR)/vx_option.c 	-o $(BUILD_DIR)/vx_option.o 	$(ARGS)
+vx_panic.o:
+	$(CC) -c $(SRC_DIR)/vx_panic.c 		-o $(BUILD_DIR)/vx_panic.o 		$(ARGS)
+vx_tostring.o:
+	$(CC) -c $(SRC_DIR)/vx_tostring.c 	-o $(BUILD_DIR)/vx_tostring.o 	$(ARGS)
+vx_vector.o:
+	$(CC) -c $(SRC_DIR)/vx_vector.c 	-o $(BUILD_DIR)/vx_vector.o 	$(ARGS)
 
 #	GENERAL
-all: file.o functions.o math.o mem.o option.o panic.o tostring.o vector.o
-	$(AR) rcs $(LIB_RESULT) $(BUILD_DIR)/file.o $(BUILD_DIR)/functions.o $(BUILD_DIR)/math.o $(BUILD_DIR)/mem.o $(BUILD_DIR)/option.o $(BUILD_DIR)/panic.o $(BUILD_DIR)/tostring.o $(BUILD_DIR)/vector.o
+all: vx_file.o vx_functions.o vx_math.o vx_mem.o vx_option.o vx_panic.o vx_tostring.o vx_vector.o
+	$(AR) rcs $(LIB_RESULT) $(BUILD_DIR)/vx_file.o $(BUILD_DIR)/vx_functions.o $(BUILD_DIR)/vx_math.o $(BUILD_DIR)/vx_mem.o $(BUILD_DIR)/vx_option.o $(BUILD_DIR)/vx_panic.o $(BUILD_DIR)/vx_tostring.o $(BUILD_DIR)/vx_vector.o
 	$(CP) $(SRC_DIR)/*.h $(RESULT_INC_DIR)
 
 test: all

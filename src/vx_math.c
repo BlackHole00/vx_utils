@@ -1,4 +1,4 @@
-#include "math.h"
+#include "vx_math.h"
 #ifndef PI
 #define PI 3.14159265359f
 #endif

@@ -1,9 +1,9 @@
 #pragma once
 #include <malloc.h>
-#include "types.h"
-#include "template.h"
-#include "option.h"
-#include "mem.h"
+#include "vx_types.h"
+#include "vx_template.h"
+#include "vx_option.h"
+#include "vx_mem.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct {

@@ -2,8 +2,8 @@
 
 /*  Eh, I don't know if you should use it... I don't like the buffering...  */
 
-#include "template.h"
-#include "types.h"
+#include "vx_template.h"
+#include "vx_types.h"
 #define _VX_TOSTRING_BUFFER_SIZE 1024
 
 extern char _vx_tostring_buffer[_VX_TOSTRING_BUFFER_SIZE];

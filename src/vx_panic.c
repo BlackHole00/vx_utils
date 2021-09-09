@@ -1,4 +1,4 @@
-#include "panic.h"
+#include "vx_panic.h"
 #include <stdio.h>
 #include <stdlib.h>
 

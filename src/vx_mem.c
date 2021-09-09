@@ -1,6 +1,6 @@
-#include "mem.h"
+#include "vx_mem.h"
 #include <malloc.h>
-#include "panic.h"
+#include "vx_panic.h"
 
 void* vx_smalloc(usize size) {
     void* ptr = malloc(size);

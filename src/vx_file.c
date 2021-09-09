@@ -1,4 +1,4 @@
-#include "file.h"
+#include "vx_file.h"
 #include "vx_utils.h"
 
 char* vx_file_get_content(FILE* file) {

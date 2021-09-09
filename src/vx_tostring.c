@@ -1,4 +1,4 @@
-#include "tostring.h"
+#include "vx_tostring.h"
 #include <stdio.h>
 
 char _vx_tostring_buffer[_VX_TOSTRING_BUFFER_SIZE];
