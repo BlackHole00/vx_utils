@@ -1,0 +1,23 @@
+#pragma once
+
+/*  Eh, I don't know if you should use it... I don't like the buffering...  */
+
+#include "template.h"
+#include "types.h"
+#define _VX_TOSTRING_BUFFER_SIZE 1024
+
+extern char _vx_tostring_buffer[_VX_TOSTRING_BUFFER_SIZE];
+
+#define _VX_TOSTRING_CREATE_PROT_FOR_TYPE(T)        const char* VX_TEMPLATE_NAME(T, vx_tostring)(T);
+#define _VX_TOSTRING_CREATE_BODY_FOR_TYPE(T, ...)   const char* VX_TEMPLATE_NAME(T, vx_tostring)(T obj) { __VA_ARGS__ }
+
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(u8)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(u16)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(u32)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(u64)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(i8)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(i16)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(i32)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(i64)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(f32)
+_VX_TOSTRING_CREATE_PROT_FOR_TYPE(f64)
