@@ -112,8 +112,8 @@ bool option_tests() {
     return 1;
 }
 
-bool vector_tests() {
-    vx_Vector vec = vx_vector_new();
+bool vector_tests() { 
+    VX_T(u32, vx_Vector) vec = VX_T(u32, vx_vector_new)();
     VX_CHECK(VX_T(u32, vx_vector_top)(&vec) == NULL, 0);
     VX_CHECK(!VX_T(u32, vx_vector_pop)(&vec).is_some, 0);
 
@@ -125,7 +125,7 @@ bool vector_tests() {
 
     VX_CHECK(vec.length == 5, 0);
     VX_VECTOR_FOREACH(u32, elem, &vec, 
-        VX_CHECK(elem == I, 0); /*  I is an hidden variable created by the foreach macro.   */
+        VX_CHECK(elem == I, 0);         /*  I is an hidden variable created by the foreach macro.   */
     )
     VX_CHECK(VX_T(u32, vx_vector_get)(&vec, 10) == NULL, 0);
     VX_CHECK(*VX_T(u32, vx_vector_get)(&vec, 4) == 4, 0);
@@ -134,11 +134,11 @@ bool vector_tests() {
     VX_CHECK(VX_T(u32, vx_vector_pop)(&vec).is_some, 0);
     VX_CHECK(VX_T(u32, vx_vector_pop)(&vec).data == 3, 0);
 
-    vx_vector_clear(&vec);
+    VX_T(u32, vx_vector_clear)(&vec);
     VX_CHECK(vec.length == 0, 0);
-    VX_T(u32, vx_vector_push)(&vec, 0); /*  Check if free with data remaining works.    */
+    VX_T(u32, vx_vector_free)(&vec);    /*  Check if free with data remaining works.    */
 
-    vx_vector_free(&vec);
+    VX_T(u32, vx_vector_new)();
 
     return 1;
 }

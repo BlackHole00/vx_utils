@@ -46,18 +46,14 @@ vx_math.o:
 	$(CC) -c $(SRC_DIR)/vx_math.c 		-o $(BUILD_DIR)/vx_math.o 		$(ARGS)
 vx_mem.o:
 	$(CC) -c $(SRC_DIR)/vx_mem.c 		-o $(BUILD_DIR)/vx_mem.o 		$(ARGS)
-vx_option.o:
-	$(CC) -c $(SRC_DIR)/vx_option.c 	-o $(BUILD_DIR)/vx_option.o 	$(ARGS)
 vx_panic.o:
 	$(CC) -c $(SRC_DIR)/vx_panic.c 		-o $(BUILD_DIR)/vx_panic.o 		$(ARGS)
 vx_tostring.o:
 	$(CC) -c $(SRC_DIR)/vx_tostring.c 	-o $(BUILD_DIR)/vx_tostring.o 	$(ARGS)
-vx_vector.o:
-	$(CC) -c $(SRC_DIR)/vx_vector.c 	-o $(BUILD_DIR)/vx_vector.o 	$(ARGS)
 
 #	GENERAL
-all: vx_file.o vx_functions.o vx_math.o vx_mem.o vx_option.o vx_panic.o vx_tostring.o vx_vector.o
-	$(AR) rcs $(LIB_RESULT) $(BUILD_DIR)/vx_file.o $(BUILD_DIR)/vx_functions.o $(BUILD_DIR)/vx_math.o $(BUILD_DIR)/vx_mem.o $(BUILD_DIR)/vx_option.o $(BUILD_DIR)/vx_panic.o $(BUILD_DIR)/vx_tostring.o $(BUILD_DIR)/vx_vector.o
+all: vx_file.o vx_functions.o vx_math.o vx_mem.o vx_panic.o vx_tostring.o
+	$(AR) rcs $(LIB_RESULT) $(BUILD_DIR)/vx_file.o $(BUILD_DIR)/vx_functions.o $(BUILD_DIR)/vx_math.o $(BUILD_DIR)/vx_mem.o $(BUILD_DIR)/vx_panic.o $(BUILD_DIR)/vx_tostring.o
 	$(CP) $(SRC_DIR)/*.h $(RESULT_INC_DIR)
 
 test: all

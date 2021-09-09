@@ -16,3 +16,4 @@
 #include "vx_default.h"
 #include "vx_file.h"
 #include "vx_tostring.h"
+#include "vx_map.h"
