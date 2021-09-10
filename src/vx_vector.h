@@ -72,19 +72,38 @@
     }                                                                                               \
     return NULL;                                                                                    \
 }
-
+#define _VX_VECTOR_INSERT_INL(T) static inline void VX_TEMPLATE_NAME(T, vx_vector_insert)(VX_TEMPLATE_NAME(T, vx_Vector)* vec, T value, u32 index) {\
+    VX_TEMPLATE_CALL(T, vx_vector_push)(vec, value);                                                \
+    for (u32 i = (vec->length - 1); i > index; i--) {                                               \
+        VX_VECTOR_DATA(vec)[i] = VX_VECTOR_DATA(vec)[i - 1];                                        \
+    }                                                                                               \
+    VX_VECTOR_DATA(vec)[index] = value;                                                             \
+}
+#define _VX_VECTOR_REMOVE_INL(T) static inline VX_TEMPLATE_NAME(T, vx_Option) VX_TEMPLATE_NAME(T, vx_vector_remove)(VX_TEMPLATE_CALL(T, vx_Vector)* vec, u32 index) {\
+    if (index >= vec->length || index < 0) {                                                        \
+        return VX_TEMPLATE_CALL(T, vx_option_none)();                                               \
+    }                                                                                               \
+    T value = VX_VECTOR_DATA(vec)[index];                                                           \
+    for (u32 i = index; i < vec->length - 1; i++) {                                                 \
+        VX_VECTOR_DATA(vec)[i] = VX_VECTOR_DATA(vec)[i + 1];                                        \
+    }                                                                                               \
+    VX_TEMPLATE_CALL(T, vx_vector_pop)(vec);                                                        \
+    return VX_TEMPLATE_CALL(T, vx_option_some)(value);                                              \
+}
 #define VX_VECTOR_FOREACH(_T, _ELEM_NAME, _VEC, ...) for(u32 I = 0; I < (_VEC)->length; I++) {      \
     _T _ELEM_NAME = VX_VECTOR_DATA(_VEC)[I]; __VA_ARGS__                                            \
 }
 
 #define _VX_VECTOR_CREATE_FOR_TYPE(_T) VX_TEMPLATE_ELEM(_T, _VX_VECTOR_ELEM)                        \
-VX_TEMPLATE_INL (_T, _VX_VECTOR_NEW_INL)                                                            \
-VX_TEMPLATE_INL (_T, _VX_VECTOR_FREE_INL)                                                           \
-VX_TEMPLATE_INL (_T, _VX_VECTOR_CLEAR_INL)                                                          \
-VX_TEMPLATE_PROT(_T, _VX_VECTOR_PUSH_INL)                                                           \
-VX_TEMPLATE_PROT(_T, _VX_VECTOR_POP_INL)                                                            \
-VX_TEMPLATE_PROT(_T, _VX_VECTOR_TOP_INL)                                                            \
-VX_TEMPLATE_PROT(_T, _VX_VECTOR_GET_INL)
+VX_TEMPLATE_INL(_T, _VX_VECTOR_NEW_INL)                                                             \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_FREE_INL)                                                            \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_CLEAR_INL)                                                           \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_PUSH_INL)                                                            \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_POP_INL)                                                             \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_TOP_INL)                                                             \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_GET_INL)                                                             \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_INSERT_INL)                                                          \
+VX_TEMPLATE_INL(_T, _VX_VECTOR_REMOVE_INL)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

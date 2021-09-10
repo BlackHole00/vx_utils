@@ -56,6 +56,7 @@ bool assert_tests() {
 }
 
 bool mem_tests() {
+    /*  As long as it doesn't crash should be fine...   */
     byte* ptr = vx_smalloc(100);
     ptr = vx_srealloc(ptr, 125);
     free(ptr);
@@ -131,6 +132,15 @@ bool vector_tests() {
     VX_CHECK(*VX_T(u32, vx_vector_get)(&vec, 4) == 4, 0);
     VX_CHECK(*VX_T(u32, vx_vector_top)(&vec) == 4, 0);
 
+    VX_T(u32, vx_vector_insert)(&vec, -1, 0);
+    VX_CHECK(VX_VD(&vec)[0] == -1, 0);
+    VX_T(u32, vx_vector_insert)(&vec, -2, 3);
+    VX_CHECK(VX_VD(&vec)[3] == -2, 0);
+    VX_T(u32, vx_vector_remove)(&vec, 0);
+    VX_CHECK(VX_VD(&vec)[0] == 0, 0);
+    VX_T(u32, vx_vector_remove)(&vec, 3);
+    VX_CHECK(VX_VD(&vec)[3] == 3, 0);
+
     VX_CHECK(VX_T(u32, vx_vector_pop)(&vec).is_some, 0);
     VX_CHECK(VX_T(u32, vx_vector_pop)(&vec).data == 3, 0);
 
@@ -143,6 +153,30 @@ bool vector_tests() {
     return 1;
 }
 
+bool hashmap_tests() {
+    VX_T(u32, vx_HashMap) map = VX_T(u32, vx_hashmap_new)();
+
+    VX_T(u32, vx_hashmap_insert)(&map, 0, 1);
+    VX_CHECK(map.length == 1, 0);
+    VX_T(u32, vx_hashmap_insert)(&map, 1, 0);
+    VX_CHECK(map.length == 2, 0);
+    VX_VECTOR_FOREACH(u32, elem, &map.hashes,
+        VX_CHECK(elem == I, 0);
+    )
+
+    VX_CHECK(*VX_T(u32, vx_hashmap_get)(&map, 0), 0);
+    VX_CHECK(VX_T(u32, vx_hashmap_get)(&map, 100) == NULL, 0);
+
+    VX_T(u32, vx_hashmap_remove)(&map, 1);
+    VX_CHECK(VX_VD(&map.values), 0);
+
+    VX_CHECK(!VX_T(u32, vx_hashmap_remove)(&map, 100).is_some, 0);
+
+    VX_T(u32, vx_hashmap_free)(&map);
+
+    return 1;
+}
+
 void unimplemented_test() {
     VX_UNIMPLEMENTED();
 }
@@ -150,15 +184,15 @@ void unimplemented_test() {
 /*  Main    */
 int main() {
     printf("ASSERT TESTS: ");
-    VX_ASSERT("Assert tests failed!", assert_tests());
+    VX_ASSERT("Assert tests failed!",   assert_tests());
     printf(" OK\n");
 
     printf("MEM TESTS: ");
-    VX_ASSERT("Mem tests failed!", mem_tests());
+    VX_ASSERT("Mem tests failed!",      mem_tests());
     printf(" OK\n");
 
     printf("DEFAULT TESTS: ");
-    VX_ASSERT("Default tests failed!", default_tests());
+    VX_ASSERT("Default tests failed!",  default_tests());
     printf(" OK\n");
 
     printf("TEMPLATE TESTS: ");
@@ -166,11 +200,15 @@ int main() {
     printf(" OK\n");
 
     printf("OPTION TESTS: ");
-    VX_ASSERT("Option tests failed!", option_tests());
+    VX_ASSERT("Option tests failed!",   option_tests());
     printf(" OK\n");
 
     printf("VECTOR TESTS: ");
-    VX_ASSERT("Vector tests failed!", vector_tests());
+    VX_ASSERT("Vector tests failed!",   vector_tests());
+    printf(" OK\n");
+
+    printf("HASHMAP TESTS: ");
+    VX_ASSERT("HashMap tests failed!",  hashmap_tests());
     printf(" OK\n");
 
     #if DO_UNIMPLEMENTED_CRASH_TEST
