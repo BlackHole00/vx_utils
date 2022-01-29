@@ -125,7 +125,7 @@ bool vector_tests() {
     VX_T(u32, vx_vector_push)(&vec, 4);
 
     VX_CHECK(vec.length == 5, 0);
-    VX_VECTOR_FOREACH(u32, elem, &vec, 
+    VX_VECTOR_FOREACH(u32, elem, &vec,
         VX_CHECK(elem == I, 0);         /*  I is an hidden variable created by the foreach macro.   */
     )
     VX_CHECK(VX_T(u32, vx_vector_get)(&vec, 10) == NULL, 0);
@@ -147,8 +147,6 @@ bool vector_tests() {
     VX_T(u32, vx_vector_clear)(&vec);
     VX_CHECK(vec.length == 0, 0);
     VX_T(u32, vx_vector_free)(&vec);    /*  Check if free with data remaining works.    */
-
-    VX_T(u32, vx_vector_new)();
 
     return 1;
 }
@@ -215,7 +213,6 @@ int main() {
         printf("UNIMPLEMENTED TEST: if the program crashes, then this system works. ");
         unimplemented_test();
     #endif
-    /*  Not gonna bother with tostring tests: That code is bad. I should remove it.    */
 
     return 0;
 }

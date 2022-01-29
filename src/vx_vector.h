@@ -1,5 +1,6 @@
 #pragma once
 #include <malloc.h>
+#include <stdio.h>
 #include "vx_types.h"
 #include "vx_template.h"
 #include "vx_option.h"

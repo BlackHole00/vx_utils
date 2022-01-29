@@ -14,7 +14,7 @@ static inline u32 _vx_hashmap_find_optimal_pos(VX_T(u64, vx_Vector)* hashes, u64
 }
 
 static inline VX_T(u32, vx_Option) _vx_hashmap_find_hash_index(VX_T(u64, vx_Vector)* hashes, u64 hash) {
-    u32 top = hashes->length;
+    u32 top = (u32)hashes->length;
     u32 bottom = 0;
     u32 center;
 
