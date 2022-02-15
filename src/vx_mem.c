@@ -6,6 +6,8 @@
 
 static u32 allocation_number = 0;
 static u32 deallocation_number = 0;
+static u32 reallocation_number = 0;
+static u32 reallocation_calls = 0;
 
 void* vx_smalloc(usize size) {
     void* ptr = malloc(size);
@@ -23,11 +25,31 @@ void* vx_srealloc(void* mem_adr, usize size) {
     /* Free old memory. */
     if (ptr != mem_adr) {
         free(mem_adr);
+
+        allocation_number++;
+        deallocation_number++;
+        reallocation_number++;
     }
+
+    reallocation_calls++;
 
     return ptr;
 }
 
+void vx_free(void* ptr) {
+    free(ptr);
+
+    deallocation_number++;
+}
+
 void vx_memory_print_state() {
-    printf("There has been %d allocations and %d deallocations. There are still %d blocks to be deallocated!\n", allocation_number, deallocation_number, allocation_number - deallocation_number);
+    printf("---[Memory state]---\n");
+    printf("\tALLOCATIONS: %d;\n", allocation_number);
+    printf("\tDEALLOCATIONS: %d\n", deallocation_number);
+    printf("\tREALLOCATIONS: %d\n", reallocation_calls);
+    printf("\tREAL REALLOCATIONS: %d\n", reallocation_number);
+    printf("\tALLOCATIONS (w/o reallocations): %d;\n", allocation_number - reallocation_number);
+    printf("\tDEALLOCATIONS (w/o reallocations): %d;\n", deallocation_number - reallocation_number);
+    printf("\nThere are %d blocks to free!\n", allocation_number - deallocation_number);
+    printf("--------------------\n");
 }

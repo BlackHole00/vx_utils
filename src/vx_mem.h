@@ -5,4 +5,5 @@
 
 void* vx_smalloc(usize);
 void* vx_srealloc(void*, usize);
+void vx_free(void*);
 void vx_memory_print_state();
