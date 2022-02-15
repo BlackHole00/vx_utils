@@ -25,7 +25,7 @@
 }
 #define _VX_VECTOR_FREE_INL(T) static inline void VX_TEMPLATE_NAME(T, vx_vector_free)(VX_TEMPLATE_NAME(T, vx_Vector)* vec) {\
     VX_NULL_ASSERT(vec);                                                                            \
-    free(vec->data);                                                                                \
+    vx_free(vec->data);                                                                             \
     vec->length = 0;                                                                                \
     vec->_mem_length = 0;                                                                           \
 }

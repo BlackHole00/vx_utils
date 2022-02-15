@@ -59,7 +59,7 @@ bool mem_tests() {
     /*  As long as it doesn't crash should be fine...   */
     byte* ptr = vx_smalloc(100);
     ptr = vx_srealloc(ptr, 125);
-    free(ptr);
+    vx_free(ptr);
 
     i32 array[5] = { 1, 2, 3, 4, 5 };
     VX_CHECK(VX_SIZE_OF_CVECTOR(array) == 5, 0);
@@ -213,6 +213,8 @@ int main() {
         printf("UNIMPLEMENTED TEST: if the program crashes, then this system works. ");
         unimplemented_test();
     #endif
+
+    vx_memory_print_state();
 
     return 0;
 }
