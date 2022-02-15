@@ -20,7 +20,10 @@ void* vx_srealloc(void* mem_adr, usize size) {
     void* ptr = realloc(mem_adr, size);
     VX_ASSERT("Could not reallocate memory!", ptr != 0 || size == 0);
 
-    deallocation_number++;
+    /* Free old memory. */
+    if (ptr != mem_adr) {
+        free(mem_adr);
+    }
 
     return ptr;
 }
